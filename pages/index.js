@@ -1,10 +1,9 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import HomePage from "../sections/HomePage";
 
-export default function Home() {
+export default function Login() {
   return (
     <>
-    
+      <HomePage />
     </>
-  )
+  );
 }
