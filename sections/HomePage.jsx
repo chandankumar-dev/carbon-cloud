@@ -8,6 +8,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import MapComponent from "../components/MapComponent";
 
 const HomePage = () => {
+  
   return (
     <div className="w-full p-3 h-[90vh]">
       <div className="container mx-auto flex items-center justify-center w-full h-full">
@@ -27,14 +28,13 @@ const HomePage = () => {
               <a
                 href="https://takeout.google.com/settings/takeout/custom/location_history"
                 target="_blank"
-                className="text-blue-400"
-              >
+                className="text-blue-400">
                 here
               </a>
             </p>
-            <div className="flex items-center gap-3 bg-blue-400 rounded-lg px-3 py-2">
-              <AiOutlineCloudUpload size={20} />
-              <Button>Upload file</Button>
+            <div className="flex items-center gap-3 ">
+              {/* <AiOutlineCloudUpload size={20} /> */}
+              <Button />
             </div>
           </div>
 
