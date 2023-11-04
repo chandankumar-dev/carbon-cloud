@@ -13,8 +13,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#000",
-        navBackground: "#fff",
+        background: "#2f4d6b",
+        navBackground: "#2f4d6b",
       },
     },
   },

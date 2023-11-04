@@ -18,4 +18,58 @@
   span {
     @apply text-blue-300;
   }
+
+  li {
+    @apply text-white text-lg;
+  }
+}
+
+.sidebar {
+  background-color: rgba(35, 55, 75, 0.9);
+  color: #fff;
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  border-radius: 4px;
+}
+
+.mapboxgl-ctrl {
+  display: none;
+}
+
+.mapboxgl-canvas {
+  height: 900px;
+  width: 100vw;
+}
+
+@media only screen and (min-width: 600px) {
+  .mapboxgl-canvas {
+    height: 500px;
+    width: 100vw;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .mapboxgl-canvas {
+    width: 50vw;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mapboxgl-canvas {
+    animation: Mapboxgl-canvas-spin infinite 15s linear;
+  }
+}
+
+@keyframes Mapboxgl-canvas-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

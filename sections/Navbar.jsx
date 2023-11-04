@@ -17,9 +17,11 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-center w-full h-full px-4 lg:px-16">
         <div className="flex items-center justify-between w-full h-full">
           <div>
-            <h1 className="text-black">
-              Carbon <span>Cloud</span>
-            </h1>
+            <Link href="/">
+              <h1 className="text-white">
+                Carbon <span>Cloud</span>
+              </h1>
+            </Link>
           </div>
 
           <div className="hidden md:flex items-center gap-10">
@@ -32,7 +34,10 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="flex md:hidden border border-black rounded-full text-black p-2" onClick={handleChange}>
+          <div
+            className="flex md:hidden border border-black rounded-full text-black p-2"
+            onClick={handleChange}
+          >
             {nav ? (
               <AiOutlineClose size={20} className="text-black" />
             ) : (
