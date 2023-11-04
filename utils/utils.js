@@ -1,11 +1,11 @@
 import { Route } from "../model/Route";
-import {
-    DirectionsCarOutlined,
-    DirectionsWalkOutlined,
-    DirectionsBusOutlined,
-    TrainOutlined,
-    QuestionMarkOutlined,
-} from "@mui/icons-material";
+// import {
+//     DirectionsCarOutlined,
+//     DirectionsWalkOutlined,
+//     DirectionsBusOutlined,
+//     TrainOutlined,
+//     QuestionMarkOutlined,
+// } from "@mui/icons-material";
 
 /**
  * Calculate the amount of carbon in kg wasted by taking this route
@@ -54,24 +54,24 @@ export function getMostProbableActivity(route) {
 }
 
 // material-ui icons
-export function getIconFromActivityName(activity) {
-    switch (activity) {
-        case "IN_VEHICLE":
-        case "IN_PASSENGER_VEHICLE":
-            return DirectionsCarOutlined;
-        case "WALKING":
-        case "RUNNING":
-        case "CYCLING":
-            return DirectionsWalkOutlined;
-        case "IN_BUS":
-            return DirectionsBusOutlined;
-        case "IN_TRAIN":
-        case "IN_SUBWAY":
-            return TrainOutlined;
-        default:
-            return QuestionMarkOutlined;
-    }
-}
+// export function getIconFromActivityName(activity) {
+//     switch (activity) {
+//         case "IN_VEHICLE":
+//         case "IN_PASSENGER_VEHICLE":
+//             return DirectionsCarOutlined;
+//         case "WALKING":
+//         case "RUNNING":
+//         case "CYCLING":
+//             return DirectionsWalkOutlined;
+//         case "IN_BUS":
+//             return DirectionsBusOutlined;
+//         case "IN_TRAIN":
+//         case "IN_SUBWAY":
+//             return TrainOutlined;
+//         default:
+//             return QuestionMarkOutlined;
+//     }
+// }
 
 export function getNameFromActivityName(activity) {
     switch (activity) {

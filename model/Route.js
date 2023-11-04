@@ -1,7 +1,7 @@
-const { Activity } = require("./Activity");
-const { Location } = require("./Location");
+import Activity from "./Activity";
+import Location from "./Location";
 
-class Route {
+export default class Route {
   constructor(start, end, startTimestamp, endTimestamp, distance, activities) {
     this.start = start;
     this.end = end;
@@ -11,5 +11,3 @@ class Route {
     this.activities = activities;
   }
 }
-
-module.exports = Route; // For Node.js

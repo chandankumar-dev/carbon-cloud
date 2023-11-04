@@ -1,5 +1,5 @@
-const Route = require("./Route");
-const Location = require("./Location");
+import Route from "./Route.js"
+import Location from "./Location.js"
 
 module.exports = {
   locations: [],

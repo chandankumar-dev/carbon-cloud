@@ -1,17 +1,25 @@
 "use client";
-import React, { useTransition, useState } from "react";
+import React, { useTransition, useState, useEffect, useContext } from "react";
 import Wrapper from "../../components/Wrapper";
 import TabButton from "../../components/TabButton";
 import { CiLocationOn } from "react-icons/ci";
 import TransitionEffect from "../../components/TransitionEffect";
+import { FileContext } from "../../context/FileContext";
+import { Unzip } from "../../read/Unzip";
+
+
 const Dashboard = () => {
   const [tab, setTab] = useState("Delhi Pune");
   const [isPending, startTransition] = useTransition();
+  const fileContext = useContext(FileContext)
+
+
   const handleTabChange = (id) => {
     startTransition(() => {
       setTab(id);
     });
   };
+
   const Route_Tab_Data = [
     {
       title: "Delhi Pune",
@@ -62,6 +70,16 @@ const Dashboard = () => {
       ),
     },
   ];
+
+  useEffect(() => {
+    if (fileContext.file) {
+      Unzip.unzipLocationHistory(fileContext.file).then((res) => {
+        // setData(res);
+        // getCarbonSum(res.routes);
+        console.log(res)
+      });
+    }
+  }, [fileContext.file]);
 
   return (
     <div className="w-full py-20">

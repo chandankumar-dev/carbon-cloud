@@ -1,7 +1,8 @@
-const { Location } = require("../model/Location.js");
-const { Route } = require("../model/Route.js");
-const { Activity } = require("../model/Activity.js");
-const { getMostProbableActivity } = require("../utils/utils.js");
+import Location from "../model/Location.js"
+import Route from "../model/Route.js";
+import Activity from "../model/Activity.js";
+import { getMostProbableActivity } from "../utils/utils.js";
+
 
 class Deserialize {
     static deserializeLocationRecords(rawData) {
