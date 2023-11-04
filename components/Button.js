@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import { FileContext } from "../context/FileContext";
@@ -19,7 +19,7 @@ const Button = () => {
     <div>
       <input type="file" id="locationData" onChange={handleFileChange} hidden />
       <label
-        className="flex transition-all flex-row w-32 mt-28  ml-98 text-lg rounded-lg p-1 text-white font-semibold hover:bg-green-500 bg-green-600 cursor-pointer hover:scale-105"
+        className="flex transition-all flex-row w-32 ml-98 text-lg rounded-lg p-1 text-white font-semibold hover:bg-blue-500 bg-blue-600 cursor-pointer hover:scale-105"
         htmlFor="locationData"
       >
         <svg
