@@ -17,7 +17,7 @@ const Button = () => {
 
   return (
     <div>
-      <input type="file" id="locationData" onChange={handleFileChange} />
+      <input type="file" id="locationData" onChange={handleFileChange} hidden />
       <label
         className="flex transition-all flex-row w-32 mt-28  ml-98 text-lg rounded-lg p-1 text-white font-semibold hover:bg-green-500 bg-green-600 cursor-pointer hover:scale-105"
         htmlFor="locationData"
