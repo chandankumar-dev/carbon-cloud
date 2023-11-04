@@ -8,7 +8,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import MapComponent from "../components/MapComponent";
 
 const HomePage = () => {
-  
+
   return (
     <div className="w-full p-3 h-[90vh]">
       <div className="container mx-auto flex items-center justify-center w-full h-full">
