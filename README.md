@@ -25,5 +25,5 @@ To run this project run
 
 ## Screenshots
 
-![App Screenshot]('https://github.com/anmolwadhwaxx/carbon-cloud/Carbon_cloud_UI_GitHub.jpg')
+![App Screenshot]('https://github.com/anmolwadhwaxx/carbon-cloud/public/assets/Carbon_cloud_UI_GitHub.jpg')
 
