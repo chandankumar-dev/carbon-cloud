@@ -1,4 +1,3 @@
-import Route from "../../../model/Route";
 import MapRoute from "./MapRoute";
 
 function TopTrips({ selectedRoute, routes, setSelectedRoute }) {
@@ -14,7 +13,7 @@ function TopTrips({ selectedRoute, routes, setSelectedRoute }) {
                     <MapRoute
                         route={route}
                         setSelectedRoute={setSelectedRoute}
-                        selected={route == selectedRoute}
+                        selected={route === selectedRoute}
                         key={route.startTimestamp}
                     />
                 ))}

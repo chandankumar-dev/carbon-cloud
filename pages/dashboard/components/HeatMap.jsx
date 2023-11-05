@@ -1,7 +1,6 @@
 import { useEffect, useContext } from "react";
 import GoogleMapReact from "google-map-react";
 import { MapContext } from "../../../context/MapContext";
-import Route from "../../../model/Route";
 
 const mapApiKey = "AIzaSyBL1xP5iEVz7h8yYSDTrNhSB85e2AWvx8k";
 

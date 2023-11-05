@@ -1,9 +1,8 @@
-import Location from "../../../assets/location.png";
 import { getCarbonForCar } from "../../../utils/utils.js";
 import { useState, useMemo } from "react";
 import location from '../../../assets/location.png'
-import { BiLocationPlus } from 'react-icons/bi'
 import Image from 'next/image'
+
 const mapApiKey = "AIzaSyBL1xP5iEVz7h8yYSDTrNhSB85e2AWvx8k";
 
 function MapRoute({ route, setSelectedRoute, selected }) {
@@ -43,7 +42,7 @@ function MapRoute({ route, setSelectedRoute, selected }) {
     return (
         // <div className="flex flex-row space-between">
         <button
-            className={`py-2 grid grid-cols-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 hover:bg-gray-100 hover:text-black  transition-all duration-300 hover:shadow-lg rounded-2xl ${selected ? "a" : ""
+            className={`py-2 grid grid-cols-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 hover:bg-gray-100 hover:text-black  transition-all duration-300 hover:shadow-lg rounded-2xl ${selected ? "bg-white text-black" : ""
                 }`}
             onClick={() => setSelectedRoute(route)}
         >
@@ -59,11 +58,12 @@ function MapRoute({ route, setSelectedRoute, selected }) {
                 <p className="text-left">{endCity}</p>
             </div>
             <div className="flex flex-row font-extrabold my-auto">
-                <p className=" flex lg  my-auto text-4xl ">
+                <p className=" flex lg  my-auto text-3xl ">
                     {getCarbonForCar(route.distance).toFixed(2)}
                 </p>
                 <p className="text-2xl my-auto ml-2 mr-10 font-bold">kg</p>
             </div>
+            {console.log(route)}
         </button>
     );
 }
