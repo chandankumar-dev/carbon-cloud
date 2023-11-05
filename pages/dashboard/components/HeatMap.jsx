@@ -93,7 +93,7 @@ function Heatmap(props) {
         <div className="h-110 w-[700px] shadow-xl">
             <GoogleMapReact
                 bootstrapURLKeys={{
-                    key: mapApiKey,
+                    key: process.env.NEXT_PUBLIC_GMAP_API_KEY,
                     libraries: ["visualization"],
                 }}
                 defaultCenter={defaultProps.center}

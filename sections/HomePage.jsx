@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Button from "../components/Button";
+import Button from "../components/Button"
 import Image from "next/image";
 // import cloud from '../public/assets/cloud1.png'
 import homePage_vector from "../public/assets/Login_graphic.png";

@@ -12,7 +12,7 @@ export default function ModalMapRouter({ route }) {
 
   useMemo(() => {
     fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${route.start.latitude},${route.start.longitude}&key=${mapApiKey}`
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${route.start.latitude},${route.start.longitude}&key=${process.env.NEXT_PUBLIC_GMAP_API_KEY}`
     )
       .then((res) => {
         if (!res.ok) {
@@ -27,7 +27,7 @@ export default function ModalMapRouter({ route }) {
       });
 
     fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${route.end.latitude},${route.end.longitude}&key=${mapApiKey}`
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${route.end.latitude},${route.end.longitude}&key=${process.env.NEXT_PUBLIC_GMAP_API_KEY}`
     )
       .then((res) => {
         if (!res.ok) {
@@ -71,17 +71,17 @@ export default function ModalMapRouter({ route }) {
           <p className="flex lg  my-auto text-2xl font-bold">
             {route
               ? `${Math.floor(
-                  (route?.endTimestamp - route?.startTimestamp) /
-                    (1000 * 60 * 60 * 24)
-                )} days ${Math.floor(
-                  ((route?.endTimestamp - route?.startTimestamp) /
-                    (1000 * 60 * 60)) %
-                    24
-                )} hours ${Math.floor(
-                  ((route?.endTimestamp - route?.startTimestamp) /
-                    (1000 * 60)) %
-                    60
-                )} minutes`
+                (route?.endTimestamp - route?.startTimestamp) /
+                (1000 * 60 * 60 * 24)
+              )} days ${Math.floor(
+                ((route?.endTimestamp - route?.startTimestamp) /
+                  (1000 * 60 * 60)) %
+                24
+              )} hours ${Math.floor(
+                ((route?.endTimestamp - route?.startTimestamp) /
+                  (1000 * 60)) %
+                60
+              )} minutes`
               : "N/A"}
           </p>
         </div>

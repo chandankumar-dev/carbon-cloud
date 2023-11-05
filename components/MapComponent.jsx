@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import { mapBoxKey } from "../constant";
 
-mapboxgl.accessToken = mapBoxKey;
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAP_BOX_API_KEY;
 
 export default function MapComponent() {
   const mapContainer = useRef(null);

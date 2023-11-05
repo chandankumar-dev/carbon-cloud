@@ -12,7 +12,7 @@ function MapRoute({ route, setSelectedRoute, selected }) {
 
     useMemo(() => {
         fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${route.start.latitude},${route.start.longitude}&key=${mapApiKey}`
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${route.start.latitude},${route.start.longitude}&key=${process.env.NEXT_PUBLIC_GMAP_API_KEY}`
         )
             .then((res) => {
                 if (!res.ok) {
@@ -26,7 +26,7 @@ function MapRoute({ route, setSelectedRoute, selected }) {
             });
 
         fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${route.end.latitude},${route.end.longitude}&key=${mapApiKey}`
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${route.end.latitude},${route.end.longitude}&key=${process.env.NEXT_PUBLIC_GMAP_API_KEY}`
         )
             .then((res) => {
                 if (!res.ok) {
