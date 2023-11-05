@@ -10,7 +10,6 @@ import {
   getCarbonForCar,
   getNameFromActivityName,
 } from "../../utils/utils.js"
-import HeatmapWrapper from "./components/HeatmapWrapper";
 import {
   Modal,
   ModalContent,
@@ -20,9 +19,6 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import Collapsible from "react-collapsible";
-import { flattenHierarchy } from "../../utils/utils";
-import { calculateCarbonSaved } from "../../utils/utils";
-import { getCarbonForCar } from "../../utils/utils";
 import BaseMap from "../../components/BaseMap";
 import ModalMapRoute from "../../components/ModalMapRoute";
 import HeatmapWrapper from "./components/HeatmapWrapper";
@@ -66,28 +62,6 @@ const Dashboard = () => {
     setCarbonWasted(carbonWaste);
   };
 
-  useEffect(() => {
-    if (fileContext.file) {
-      Unzip.unzipLocationHistory(fileContext.file).then((res) => {
-        setData(res);
-        getCarbonSum(res.routes);
-      });
-    }
-  }, [fileContext.file]);
-
-  const getCarbonSum = (data) => {
-    let carbonSum = 0;
-    let carbonWaste = 0;
-    const flatten = flattenHierarchy(data);
-
-    flatten.forEach((route) => {
-      carbonSum += calculateCarbonSaved(route);
-      carbonWaste += getCarbonForCar(route.distance) - calculateCarbonSaved(route);
-    });
-
-    setCarbonSaved(carbonSum);
-    setCarbonWasted(carbonWaste);
-  };
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
