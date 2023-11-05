@@ -5,6 +5,13 @@ import TransitionEffect from "../../components/TransitionEffect";
 import { FileContext } from "../../context/FileContext";
 import { Unzip } from "../../read/Unzip";
 import {
+  calculateCarbonSaved,
+  flattenHierarchy,
+  getCarbonForCar,
+  getNameFromActivityName,
+} from "../../utils/utils.js"
+import HeatmapWrapper from "./components/HeatmapWrapper";
+import {
   Modal,
   ModalContent,
   ModalHeader,
@@ -59,10 +66,33 @@ const Dashboard = () => {
     setCarbonWasted(carbonWaste);
   };
 
+  useEffect(() => {
+    if (fileContext.file) {
+      Unzip.unzipLocationHistory(fileContext.file).then((res) => {
+        setData(res);
+        getCarbonSum(res.routes);
+      });
+    }
+  }, [fileContext.file]);
+
+  const getCarbonSum = (data) => {
+    let carbonSum = 0;
+    let carbonWaste = 0;
+    const flatten = flattenHierarchy(data);
+
+    flatten.forEach((route) => {
+      carbonSum += calculateCarbonSaved(route);
+      carbonWaste += getCarbonForCar(route.distance) - calculateCarbonSaved(route);
+    });
+
+    setCarbonSaved(carbonSum);
+    setCarbonWasted(carbonWaste);
+  };
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <div className="w-full bg-background">
+    <div className="w-full bg-background bg-background">
       <TransitionEffect />
       <Wrapper>
         <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
