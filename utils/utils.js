@@ -105,3 +105,17 @@ export function flattenHierarchy(data) {
 
     return flatData;
 }
+
+// export function flattenHierarchy(data) {
+//     let flatData;
+//     data.forEach((value) => {
+//       value.forEach((value) => {
+//         flatData = flatData.concat(value);
+//       });
+//     });
+//     flatData.sort((a, b) => {
+//       return b.startTimestamp - a.startTimestamp;
+//     });
+
+//     return flatData;
+//   }
