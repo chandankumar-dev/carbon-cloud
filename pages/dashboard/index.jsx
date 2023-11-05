@@ -9,7 +9,7 @@ import {
   flattenHierarchy,
   getCarbonForCar,
   getNameFromActivityName,
-} from "../../utils/utils.js"
+} from "../../utils/utils.js";
 import {
   Modal,
   ModalContent,
@@ -22,6 +22,7 @@ import Collapsible from "react-collapsible";
 import BaseMap from "../../components/BaseMap";
 import ModalMapRoute from "../../components/ModalMapRoute";
 import HeatmapWrapper from "../../components/HeatmapWrapper.jsx";
+import Loader from "../../components/Loader.jsx";
 
 const Dashboard = () => {
   const [route, setRoute] = useState(null);
@@ -62,7 +63,6 @@ const Dashboard = () => {
     setCarbonWasted(carbonWaste);
   };
 
-
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
@@ -91,24 +91,24 @@ const Dashboard = () => {
                         <p className="text-2xl font-medium text-black">
                           {route
                             ? new Date(route?.startTimestamp).toLocaleString(
-                              "en-US",
-                              {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                              }
-                            )
+                                "en-US",
+                                {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                }
+                              )
                             : "N/A"}{" "}
                           to{" "}
                           {route
                             ? new Date(route?.endTimestamp).toLocaleString(
-                              "en-US",
-                              {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                              }
-                            )
+                                "en-US",
+                                {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                }
+                              )
                             : "N/A"}{" "}
                         </p>
                       </div>
@@ -224,7 +224,7 @@ const Dashboard = () => {
                 })}
             </div>
           ) : (
-            <div>this will be the loader</div>
+            <Loader />
           )}
         </div>
       </Wrapper>
