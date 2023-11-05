@@ -6,13 +6,33 @@ import { CiLocationOn } from "react-icons/ci";
 import TransitionEffect from "../../components/TransitionEffect";
 import { FileContext } from "../../context/FileContext";
 import { Unzip } from "../../read/Unzip";
-
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  Button,
+  useDisclosure,
+} from "@nextui-org/react";
+import Collapsible from "react-collapsible";
+import { flattenHierarchy } from "../../utils/utils";
+import { calculateCarbonSaved } from "../../utils/utils";
+import { getCarbonForCar } from "../../utils/utils";
+import BaseMap from "../../components/BaseMap";
+import ModalMapRoute from "../../components/ModalMapRoute";
 
 const Dashboard = () => {
   const [tab, setTab] = useState("Delhi Pune");
+  const [route, setRoute] = useState(null);
+  const [data, setData] = useState(null);
   const [isPending, startTransition] = useTransition();
-  const fileContext = useContext(FileContext)
+  const fileContext = useContext(FileContext);
 
+  const [carbonSaved, setCarbonSaved] = useState(0);
+  const [carbonWasted, setCarbonWasted] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [leaderboardValue, setLeaderboardValue] = useState("");
 
   const handleTabChange = (id) => {
     startTransition(() => {
@@ -34,7 +54,8 @@ const Dashboard = () => {
           // style="border:0;"
           allowfullscreen=""
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+          referrerpolicy="no-referrer-when-downgrade"
+        />
       ),
     },
 
@@ -51,7 +72,8 @@ const Dashboard = () => {
           // style="border:0;"
           allowfullscreen=""
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+          referrerpolicy="no-referrer-when-downgrade"
+        />
       ),
     },
 
@@ -66,7 +88,8 @@ const Dashboard = () => {
           // style="border:0;"
           allowfullscreen=""
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+          referrerpolicy="no-referrer-when-downgrade"
+        />
       ),
     },
   ];
@@ -74,15 +97,39 @@ const Dashboard = () => {
   useEffect(() => {
     if (fileContext.file) {
       Unzip.unzipLocationHistory(fileContext.file).then((res) => {
-        // setData(res);
-        // getCarbonSum(res.routes);
-        console.log(res)
+        setData(res);
+        getCarbonSum(res.routes);
       });
     }
   }, [fileContext.file]);
 
+  const getCarbonSum = (data) => {
+    let carbonSum = 0;
+    let carbonWaste = 0;
+    const flatten = flattenHierarchy(data);
+    flatten.forEach((route) => {
+      carbonSum += calculateCarbonSaved(route);
+      carbonWaste +=
+        getCarbonForCar(route.distance) - calculateCarbonSaved(route);
+    });
+    setCarbonSaved(carbonSum);
+    setCarbonWasted(carbonWaste);
+  };
+
+  useEffect(() => {
+    if (fileContext.file) {
+      Unzip.unzipLocationHistory(fileContext.file).then((res) => {
+        // setData(res);
+        // getCarbonSum(res.routes);
+        console.log(res);
+      });
+    }
+  }, [fileContext.file]);
+
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   return (
-    <div className="w-full py-20">
+    <div className="w-full bg-background">
       <TransitionEffect />
       <Wrapper>
         <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
@@ -101,7 +148,8 @@ const Dashboard = () => {
           <div className="flex flex-col  items-center justify-center gap-16 mt-5">
             <TabButton
               selectTab={() => handleTabChange("Delhi Pune")}
-              active={tab === "Delhi Pune"}>
+              active={tab === "Delhi Pune"}
+            >
               <div className="flex items-center gap-5">
                 <div className="flex flex-col items-center">
                   <CiLocationOn size={40} />
@@ -120,7 +168,8 @@ const Dashboard = () => {
             </TabButton>
             <TabButton
               selectTab={() => handleTabChange("Delhi Gujarat")}
-              active={tab === "Delhi Gujarat"}>
+              active={tab === "Delhi Gujarat"}
+            >
               <div className="flex items-center gap-5">
                 <div className="flex flex-col items-center">
                   <CiLocationOn size={40} />
@@ -137,10 +186,10 @@ const Dashboard = () => {
                 </div>
               </div>
             </TabButton>
-
             <TabButton
               selectTab={() => handleTabChange("Maharastra MP")}
-              active={tab === "Maharastra MP"}>
+              active={tab === "Maharastra MP"}
+            >
               <div className="flex items-center gap-5">
                 <div className="flex flex-col items-center">
                   <CiLocationOn size={40} />
@@ -159,6 +208,157 @@ const Dashboard = () => {
             </TabButton>
           </div>
           <div>{Route_Tab_Data.find((t) => t.id === tab).content}</div>
+        </div>
+
+        <div className="mt-20 py-5">
+          <div className="mt-10 flex justify-center mb-10">
+            <h2 className="text-4xl font-bold pb-5">View All Past Data</h2>
+          </div>
+          <div>
+            <Modal size="4xl" isOpen={isOpen} onOpenChange={onOpenChange}>
+              <ModalContent>
+                {(onClose) => (
+                  <>
+                    <ModalHeader className="flex flex-col gap-1 px-2">
+                      <div>
+                        <p className="text-2xl font-medium text-black">
+                          {route
+                            ? new Date(route?.startTimestamp).toLocaleString(
+                                "en-US",
+                                {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                }
+                              )
+                            : "N/A"}{" "}
+                          to{" "}
+                          {route
+                            ? new Date(route?.endTimestamp).toLocaleString(
+                                "en-US",
+                                {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                }
+                              )
+                            : "N/A"}{" "}
+                        </p>
+                      </div>
+                    </ModalHeader>
+
+                    <ModalBody className="px-0 py-0">
+                      <div className="grid grid-cols-2">
+                        <div className="bg-blue-400">
+                          <BaseMap selectedRoute={route} />
+                        </div>
+                        <div className="">
+                          {route && <ModalMapRoute route={route} />}
+                        </div>
+                      </div>
+                    </ModalBody>
+                  </>
+                )}
+              </ModalContent>
+            </Modal>
+          </div>
+          {data ? (
+            <div className="flex flex-col text-left text-xl gap-3 border border-emerald mx-40 pl-6 pt-5 pb-5 rounded-lg shadow-md">
+              <div className="flex flex-row pt-2 pb-2 font-bold">
+                <div className="flex gap-12">
+                  <span className="text-white">Year</span>
+                  <span className="text-white">Month</span>
+                  <span className="text-white">Record</span>
+                </div>
+              </div>
+              {Array.from(data.routes.keys())
+                .sort()
+                .reverse()
+                .map((category, index) => {
+                  return (
+                    <Collapsible trigger={category} key={index}>
+                      {Array.from(data.routes.get(category).keys())
+                        // sort by month
+                        .sort((a, b) => {
+                          const months = [
+                            "JANUARY",
+                            "FEBRUARY",
+                            "MARCH",
+                            "APRIL",
+                            "MAY",
+                            "JUNE",
+                            "JULY",
+                            "AUGUST",
+                            "SEPTEMBER",
+                            "OCTOBER",
+                            "NOVEMBER",
+                            "DECEMBER",
+                          ];
+                          return (
+                            months.indexOf(a.toUpperCase()) -
+                            months.indexOf(b.toUpperCase())
+                          );
+                        })
+                        .map((subcategory, index) => {
+                          return (
+                            <div className="ml-20" key={index}>
+                              <Collapsible
+                                // className="hover:bg-gray-50"
+                                key={Math.random()}
+                                trigger={
+                                  subcategory.charAt(0).toUpperCase() +
+                                  subcategory.toLowerCase().slice(1)
+                                }
+                              >
+                                {data.routes
+                                  .get(category)
+                                  .get(subcategory)
+                                  .sort((a, b) => {
+                                    return b.startTimestamp - a.startTimestamp;
+                                  })
+                                  .map((route, index) => {
+                                    return (
+                                      <div
+                                        key={index}
+                                        className="ml-28"
+                                        onClick={() => {
+                                          setRoute(route);
+                                          onOpenChange(true);
+                                        }}
+                                      >
+                                        <div className="flex flex-row hover:cursor-pointer">
+                                          <h3 className="p-2">
+                                            {new Date(
+                                              route.startTimestamp
+                                            ).toLocaleString("en-US", {
+                                              year: "numeric",
+                                              month: "long",
+                                              day: "numeric",
+                                            })}{" "}
+                                            to{" "}
+                                            {new Date(
+                                              route.endTimestamp
+                                            ).toLocaleString("en-US", {
+                                              year: "numeric",
+                                              month: "long",
+                                              day: "numeric",
+                                            })}
+                                          </h3>
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                              </Collapsible>
+                            </div>
+                          );
+                        })}
+                    </Collapsible>
+                  );
+                })}
+            </div>
+          ) : (
+            <div>this will be the loader</div>
+          )}
         </div>
       </Wrapper>
     </div>
