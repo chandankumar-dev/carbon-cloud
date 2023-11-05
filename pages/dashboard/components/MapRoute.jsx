@@ -2,8 +2,9 @@ import { getCarbonForCar } from "../../../utils/utils.js";
 import { useState, useMemo } from "react";
 import location from '../../../assets/location.png'
 import Image from 'next/image'
+import { mapApiKey } from "../../../constant.js";
 
-const mapApiKey = "AIzaSyBL1xP5iEVz7h8yYSDTrNhSB85e2AWvx8k";
+
 
 function MapRoute({ route, setSelectedRoute, selected }) {
     const [startCity, setStartCity] = useState("City");
