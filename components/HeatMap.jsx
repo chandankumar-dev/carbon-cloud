@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import GoogleMapReact from "google-map-react";
-import { MapContext } from "../../../context/MapContext";
-import { mapApiKey } from "../../../constant";
+import { MapContext } from "../context/MapContext";
+import { mapApiKey } from "../constant";
 
 function parseData(compositeData) {
     const resData = {

@@ -21,7 +21,7 @@ import {
 import Collapsible from "react-collapsible";
 import BaseMap from "../../components/BaseMap";
 import ModalMapRoute from "../../components/ModalMapRoute";
-import HeatmapWrapper from "./components/HeatmapWrapper";
+import HeatmapWrapper from "../../components/HeatmapWrapper.jsx";
 
 const Dashboard = () => {
   const [route, setRoute] = useState(null);

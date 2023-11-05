@@ -1,4 +1,4 @@
-import { getCarbonForCar } from "../../../utils/utils.js";
+import { getCarbonForCar } from "../utils/utils.js";
 
 const factors = {
     IN_BUS: 0.25,
